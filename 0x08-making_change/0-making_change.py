@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def makeChange(coins, total):
     count = 0
     coins = sorted(coins)
