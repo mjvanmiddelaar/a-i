@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 def makeChange(coins, total):
+    """make change
+    """
     count = 0
     coins = sorted(coins)
     while len(coins) > 1:
