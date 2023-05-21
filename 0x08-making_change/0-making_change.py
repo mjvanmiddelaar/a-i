@@ -4,6 +4,7 @@
 
 cache = {0: 0}
 
+
 def makeChange(coins, total):
     """Make change function
 
@@ -46,9 +47,9 @@ def makeChangeInternal(coins, total):
         cache[total] = cache[mod] + int(total / maxCoin)
         return cache[total]
 
-    temp = makeChange(coins, mod)
-    temp2 = makeChange(coins, total)
-    if 0 < temp < temp2:
+    temp = makeChangeInternal(coins, mod)
+    temp2 = makeChangeInternal(coins, total)
+    if 0 < temp and (temp2 == -1 or temp < temp2):
         cache[total] = temp + int(total / maxCoin)
         return cache[total]
     if 0 < temp2:
