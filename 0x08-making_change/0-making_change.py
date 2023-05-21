@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module determins number of coins for total"""
 
+cache = {0: 0}
 
 def makeChange(coins, total):
     """Make change function
@@ -12,17 +13,32 @@ def makeChange(coins, total):
     Returns:
         Total count
     """
-    if total <= 0:
-        return 0
-
-    count = 0
     coins = sorted(coins)
-    while len(coins) > 0:
-        coin = coins.pop()
-        if coin > total:
-            continue
-        count += int(total / coin)
-        total = total % coin
-        if total == 0:
-            return count
+    for coin in coins:
+        cache[coin] = 1
+    return makeChangeInternal(coins, total)
+
+def makeChangeInternal(coins, total):
+    if total in cache:
+        return cache[total]
+    if len(coins) == 0:
+        return -1
+
+    maxCoin = coins.pop()
+    if maxCoin > total:
+        return makeChangeInternal(coins, total)
+
+    mod = total % maxCoin
+    if mod in cache:
+        cache[total] = cache[mod] + int(total / maxCoin)
+        return cache[total]
+
+    temp = makeChange(coins, mod)
+    temp2 = makeChange(coins, total)
+    if 0 < temp < temp2:
+        cache[total] = temp + int(total / maxCoin)
+        return cache[total]
+    if 0 < temp2:
+        cache[total] = temp2
+        return cache[total]
     return -1
