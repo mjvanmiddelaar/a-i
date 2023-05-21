@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module determins number of coins for total"""
 
+
 cache = {0: 0}
 
 def makeChange(coins, total):
@@ -17,6 +18,7 @@ def makeChange(coins, total):
     for coin in coins:
         cache[coin] = 1
     return makeChangeInternal(coins, total)
+
 
 def makeChangeInternal(coins, total):
     """Make change function internal
