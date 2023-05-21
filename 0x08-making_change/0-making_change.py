@@ -19,6 +19,17 @@ def makeChange(coins, total):
     return makeChangeInternal(coins, total)
 
 def makeChangeInternal(coins, total):
+    """Make change function internal
+
+    Args:
+        coins: first integer
+        total: second integer
+
+    Returns:
+        Total count
+    """
+    if total < 0:
+        return 0
     if total in cache:
         return cache[total]
     if len(coins) == 0:
@@ -41,4 +52,5 @@ def makeChangeInternal(coins, total):
     if 0 < temp2:
         cache[total] = temp2
         return cache[total]
+
     return -1
